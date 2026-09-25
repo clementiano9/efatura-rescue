@@ -1,36 +1,40 @@
 # e-Fatura Rescue: demo
 
-A local page that stands in for e-Fatura's pending-invoices list, plus a side panel that sorts all 11 sample invoices in one pass. There's no Chrome extension, no Finanças login and no nif.pt lookups: CAE codes come from the sample data.
+Two local pages, both served by `bun server.ts`:
+- **http://localhost:3210**: the original stand-alone mock, with a side panel that sorts the 11 sample invoices. CAE codes come from the sample data; no extension needed.
+- **http://localhost:3210/fixture/resolverListaPendenciasAdquirenteForm.action**: a copy of the real "resolver pendências" page (same row IDs, buttons and paging library) for the Chrome extension in `../extension`. Use this one on stage: it's the real extension on a page shaped like the real portal.
 
 ## Run
 ```sh
-echo "TYPESAFE_API_KEY=..." > demo/.env   # bun loads it automatically
 cd demo
-bun eval.ts      # accuracy + response time on the 11 pending invoices
-bun server.ts    # http://localhost:3210
+bun eval.ts          # mock-page mode: the full CAE list filters the options
+bun eval.ts --hint   # extension mode: main CAE + business description only, all 16 categories
+bun server.ts
 ```
-
-Every Jev answer is saved to `jev-cache.json`, so once `eval.ts` has run with a key the demo works offline. If you change a criteria sentence in `logic.js`, the cache entry no longer matches and Jev is called again.
+`demo/.env` needs `TYPESAFE_API_KEY` (OpenRouter `sk-or-…` or TypeSafe) and, for the extension, `NIFPT_API_KEY`. Jev answers are saved to `jev-cache.json`, so the mock page works offline after one run. Editing an option sentence in `extension/lib/logic.js` invalidates the matching entries.
 
 ## How it decides
-1. **Narrow (code):** `CAE_TABLE` in `logic.js` lists the categories each merchant activity allows. If only one is left, the invoice is resolved without Jev (in the sample data, only the care home).
-2. **Decide (Jev):** one call per remaining invoice, with a `category` choice (allowed options only; each option's sentence is the reason shown to the user).
-3. **Gate (code):** pre-fill the category when Jev's confidence is above 0.8. Otherwise the row turns amber with "Check your receipt" and the runner-up category.
-
-Jev is reached through OpenRouter when the key starts with `sk-or-`, and through TypeSafe directly otherwise. Set `TYPESAFE_BASE_URL` to override this.
-
-## Results (2026-09-25, jev-latest via OpenRouter)
-- 10/10 correct on the invoices the CAE table couldn't settle, and 11/11 overall.
-- 8 pre-filled, 3 sent to the user: the café (74% confidence), the gym protein bar (70%) and the vet (65%). All 3 best guesses were right.
-- About 490–575 ms per call, measured from Lisbon.
-- A "needs receipt" noul was dropped. Three wordings each scored the same on every invoice (0.2–0.6), so it told the invoices apart no better than guessing.
+1. **Narrow (code):** on the mock page, `CAE_TABLE` limits the options to what the merchant's activities allow. The extension only has the main CAE from nif.pt, so it passes the CAE and description to Jev as hints and offers all categories.
+2. **Decide (Jev):** one `category` choice per invoice. Each option's sentence is the reason shown to the user. The date is left out of the request so repeat invoices reuse one answer.
+3. **Gate (code):** fill in the category when Jev's confidence is above 0.8. Otherwise the row turns amber and shows the runner-up.
 4. **Submit (user):** nothing is ever submitted automatically.
 
-The deduction total uses the 2025 IRS rates and caps (`RULES` in `logic.js`).
+The deduction total uses the 2025 IRS rates and caps (`RULES` in `extension/lib/logic.js`).
 
-## Demo script (2 min)
-1. "Every February you open e-Fatura and sort these by hand. The portal has no bulk edit."
-2. Click **Sort pending invoices**. 8 rows pre-fill, and 3 turn amber.
+## Results (2026-09-25, jev-latest via OpenRouter)
+| Mode | Correct | Filled in | Sent to the user |
+|---|---|---|---|
+| Mock page (full CAE list) | 11/11 | 8, all right | 3: pharmacy 76%, protein bar 69%, vet 56%; all best guesses right |
+| Extension (main CAE + description) | 10/11 | 9, all right | 2: take-away bread 79% (right), protein bar 48% (wrong: Ginásios over Outros 47%) |
+
+- Calls took 280–970 ms, measured from Lisbon.
+- In both modes, every invoice filled in without asking was correct. The only wrong guess was held back for the user.
+- A "needs receipt" yes/no question was dropped. Three wordings each scored about the same on every invoice (0.2–0.6), so it couldn't tell cases apart.
+- Confidence moves a few points between runs, so a row near 0.8 can switch between filled in and amber.
+
+## Demo script (2 min, extension on the fixture page)
+1. "Every February you open e-Fatura and sort these by hand, one button per invoice."
+2. Press **Sort pending invoices**. 9 rows turn green with their buttons pressed, and 2 turn amber.
 3. Point at a reason: "Jev doesn't write text. This sentence is the option it picked."
-4. Open the vet row: a vet clinic that also runs a pet shop, with the same VAT rate either way. It asks instead of guessing.
-5. End on the euro total.
+4. Open the protein-bar row: 48% gym vs 47% other. "It knows it doesn't know, so it asks."
+5. End on the euro total, then press Submeter yourself.

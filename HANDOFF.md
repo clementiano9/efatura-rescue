@@ -5,6 +5,9 @@ Written 2026-09-25. Shelved for the 4-5 hour Lisbon Jev hackathon, where Clement
 ## Simplified demo (built 2026-09-25)
 `demo/` holds a working cut-down version: a local mock of the pending-invoices page, the CAE table, Jev calls through a small bun server, the confidence gate and a euro total. It leaves out the extension, portal scraping and nif.pt. Run through OpenRouter, Jev got 10/10 on the ambiguous invoices and pre-filled 8 of the 11. The `needs_receipt` noul in the design below didn't work, so the gate uses choice confidence only. Results and the run steps are in `demo/README.md`.
 
+## Extension (built 2026-09-25)
+`extension/` is a working Manifest V3 extension for the real resolve page (`resolverListaPendenciasAdquirenteForm.action`), planned in `EXTENSION_PLAN.md`. It was tested on a mock of that page (`demo/fixture.ts`) but **not yet on the real portal**. The first real run should check whether Submeter saves picks made on other list pages. See `extension/README.md`.
+
 ## What to build
 A Chrome extension that works on the logged-in e-Fatura portal. It reads the buyer's **pending** invoices (the ones AT couldn't classify), decides the IRS deduction category for each, pre-selects it, and leaves the Submit click to the user. Jev decides each category; plain code fetches the invoices, looks up the merchant, and narrows the options.
 

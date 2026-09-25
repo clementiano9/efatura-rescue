@@ -1,0 +1,11 @@
+{
+  "_note": "What nif.pt would return (main CAE + business description) for the sample merchants. Used only on the localhost fixture.",
+  "552601810": { "caes": ["47730"], "activity": "Farmácia. Comércio a retalho de produtos farmacêuticos, cosmética e higiene." },
+  "559083017": { "caes": ["86230"], "activity": "Atividades de medicina dentária. Comércio a retalho de material ótico." },
+  "566131862": { "caes": ["10711"], "activity": "Fabrico de pão e pastelaria. Pastelaria e cafetaria com serviço de mesa." },
+  "596030827": { "caes": ["93130"], "activity": "Ginásio e atividades de fitness. Venda de suplementos e artigos de desporto." },
+  "546281940": { "caes": ["96021"], "activity": "Barbearia e cabeleireiro. Venda de produtos de cosmética." },
+  "582199352": { "caes": ["75000"], "activity": "Clínica veterinária. Comércio a retalho de alimentos e acessórios para animais." },
+  "578657970": { "caes": ["88910"], "activity": "Instituição particular de solidariedade social. Creche e educação pré-escolar." },
+  "548757496": { "caes": ["87301"], "activity": "Estrutura residencial para pessoas idosas." }
+}

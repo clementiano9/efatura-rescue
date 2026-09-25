@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>e-Fatura Rescue settings</title>
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; color: #1d1f22; max-width: 520px; margin: 32px auto; padding: 0 16px; }
+  label { display: block; margin-top: 16px; font-weight: 600; }
+  small { display: block; color: #6b6f76; font-weight: 400; }
+  input { width: 100%; box-sizing: border-box; margin-top: 6px; padding: 8px; font: inherit; border: 1px solid #d9d5cc; border-radius: 6px; }
+  button { margin-top: 20px; padding: 8px 16px; font: inherit; font-weight: 600; color: #fff; background: #1f5f4a; border: 0; border-radius: 6px; cursor: pointer; }
+  #saved { margin-left: 10px; color: #1f5f4a; }
+</style>
+</head>
+<body>
+<h2>e-Fatura Rescue</h2>
+<p>Keys are stored in this browser only and sent only to the service they belong to.</p>
+<label>Jev key
+  <small>An OpenRouter key (sk-or-…) or a TypeSafe key.</small>
+  <input id="jevKey" type="password" autocomplete="off">
+</label>
+<label>nif.pt key
+  <small>Free at nif.pt/api. Used to look up each merchant's activity (CAE), 10 lookups an hour.</small>
+  <input id="nifptKey" type="password" autocomplete="off">
+</label>
+<button id="save">Save</button><span id="saved"></span>
+<script src="options.js"></script>
+</body>
+</html>

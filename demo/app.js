@@ -14,26 +14,26 @@ if (!hasKey) {
 $("count").textContent = `${invoices.length} invoices AT could not classify`;
 
 for (const inv of invoices) {
-  state.set(inv.idDocumento, { inv, status: "empty", code: "" });
+  state.set(inv.id, { inv, status: "empty", code: "" });
   const tr = document.createElement("tr");
-  tr.id = `r${inv.idDocumento}`;
-  const opts = allowedCategories(inv._cae).map((c) => `<option value="${c}">${CATEGORIES[c].name}</option>`).join("");
+  tr.id = `r${inv.id}`;
+  const opts = allowedCategories(inv.fullCaes).map((c) => `<option value="${c}">${CATEGORIES[c].name}</option>`).join("");
   tr.innerHTML = `
-    <td><div class="merchant">${inv.nomeEmitente}</div><div class="sub num">NIF ${inv.nifEmitente}</div><div class="detail"></div></td>
-    <td class="hide-sm num">${inv.dataEmissaoDocumento}</td>
-    <td class="r num">${cents(inv.valorTotal)}</td>
-    <td class="r hide-sm num">${cents(inv.valorIva)}</td>
+    <td><div class="merchant">${inv.merchant}</div><div class="sub num">NIF ${inv.nif}</div><div class="detail"></div></td>
+    <td class="hide-sm num">${inv.date}</td>
+    <td class="r num">${cents(inv.total)}</td>
+    <td class="r hide-sm num">${cents(inv.vat)}</td>
     <td><select><option value="">— choose —</option>${opts}</select></td>
     <td><button class="submit" disabled>Submit</button></td>`;
   tr.querySelector("select").addEventListener("change", (e) => {
-    const s = state.get(inv.idDocumento);
+    const s = state.get(inv.id);
     s.code = e.target.value;
     s.status = s.code ? "confirmed" : "empty";
-    paint(inv.idDocumento);
+    paint(inv.id);
   });
   tr.querySelector(".submit").addEventListener("click", () => {
-    state.get(inv.idDocumento).status = "done";
-    paint(inv.idDocumento);
+    state.get(inv.id).status = "done";
+    paint(inv.id);
   });
   $("rows").append(tr);
 }
@@ -86,13 +86,13 @@ $("go").addEventListener("click", async () => {
   const t0 = performance.now();
   const results = await Promise.all(
     invoices.map(async (inv) => {
-      const r = await (await fetch(`/api/decide/${inv.idDocumento}`)).json();
-      const s = state.get(inv.idDocumento);
+      const r = await (await fetch(`/api/decide/${inv.id}`)).json();
+      const s = state.get(inv.id);
       s.result = r;
       s.code = r.code ?? "";
       s.status = r.source === "none" ? "empty" : r.action;
-      paint(inv.idDocumento);
-      const tr = $(`r${inv.idDocumento}`);
+      paint(inv.id);
+      const tr = $(`r${inv.id}`);
       tr.classList.add("fresh");
       return r;
     }),

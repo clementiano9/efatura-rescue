@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "e-Fatura Rescue",
+  "version": "0.1.0",
+  "description": "Sorts e-Fatura's pending invoices into IRS deduction categories with Jev. You press Submit.",
+  "permissions": ["storage", "alarms"],
+  "host_permissions": ["https://openrouter.ai/*", "https://api.typesafe.ai/*", "https://www.nif.pt/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://faturas.portaldasfinancas.gov.pt/resolverListaPendenciasAdquirenteForm.action*",
+        "https://faturas.portaldasfinancas.gov.pt/resolverListaPendenciasAdquirente.action*",
+        "http://localhost:3210/fixture/resolverListaPendenciasAdquirente*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/logic.js"],
+      "matches": ["https://faturas.portaldasfinancas.gov.pt/*", "http://localhost:3210/*"]
+    }
+  ],
+  "options_page": "options.html",
+  "action": { "default_title": "e-Fatura Rescue" }
+}
