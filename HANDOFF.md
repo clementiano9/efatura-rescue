@@ -1,12 +1,24 @@
 # Handoff: e-Fatura Rescue
 
-Written 2026-09-25. Shelved for the 4-5 hour Lisbon Jev hackathon, where Clement chose the prompt checker instead (see `~/ai-projects/jev-prompt-check/HANDOFF.md`). Keep this for a longer hackathon (2 days) or a side project. Only the sample data exists; nothing else is built.
+Written 2026-09-25. First shelved in favour of the prompt checker (see `~/ai-projects/jev-prompt-check/HANDOFF.md`), then built the same day as a demo and a working Chrome extension; see the status sections below.
 
 ## Simplified demo (built 2026-09-25)
 `demo/` holds a working cut-down version: a local mock of the pending-invoices page, the CAE table, Jev calls through a small bun server, the confidence gate and a euro total. It leaves out the extension, portal scraping and nif.pt. Run through OpenRouter, Jev got 10/10 on the ambiguous invoices and pre-filled 8 of the 11. The `needs_receipt` noul in the design below didn't work, so the gate uses choice confidence only. Results and the run steps are in `demo/README.md`.
 
 ## Extension (built 2026-09-25)
-`extension/` is a working Manifest V3 extension for the real resolve page (`resolverListaPendenciasAdquirenteForm.action`), planned in `EXTENSION_PLAN.md`. It was tested on a mock of that page (`demo/fixture.ts`) but **not yet on the real portal**. The first real run should check whether Submeter saves picks made on other list pages. See `extension/README.md`.
+`extension/` is a working Manifest V3 extension for the real resolve page (`resolverListaPendenciasAdquirenteForm.action`), planned in `EXTENSION_PLAN.md`. Setup, internals and mock-page tests are in `extension/README.md`; `demo/fixture.ts` is the mock page used for tests and the stage demo.
+
+### Real portal results (Clement's account, 2026-09-25)
+- **49 of 50 pending invoices filled in on the first run**, 1 left amber. All 50 fit on one list page after the switch to 50 rows. Merchants included Metro de Lisboa (monthly passes, €40.00 with €2.26 VAT), Pingo Doce, Continente and Daufood.
+- 7 merchants were queued for nif.pt (10 lookups an hour), so the first decisions were made without their CAE. An amber row is re-asked when its lookup arrives.
+- **Same-sector pop-up:** choosing a sector for a merchant with several invoices on the page opens `#modalPendencias` ("All" `#allBtn` / "Only this" `#oneBtn`). The extension now clicks one button at a time and answers "Only this", because Jev decides each invoice separately. Tested on the mock page with the real IDs; not yet re-run on the portal.
+- **Repeat-merchant bug:** one Daufood invoice (€15.90, a single 23% line) came back amber as "Outros 68%", while its other Daufood invoices had been filled in as Restauração at 88%. The fix: after the first pass, an amber row is asked again, with the merchant's already-settled invoices and their amounts as evidence. A rebuilt copy of that row moved from Outros 91% (which would have been filled in wrongly) to Restauração 68% (amber, right best guess). On the sample set: take-away bread went from amber to correctly filled in (87–88%), the protein bar stayed amber (54–59% Ginásios), and nothing wrong was filled in. Confident rows are never re-asked, because the same shop can sell a meal and a loaf of bread. One early mock run skipped the re-ask; it didn't happen again in 3 later runs.
+- **Setup issue hit:** an OpenRouter key missing its last character returns 401 "User not found". A full key is `sk-or-v1-` + 64 hex characters (73 in total), and the Settings page now warns when a key is short.
+
+### Still unverified on the real portal
+- Whether Submeter saves picks made on list pages you're not viewing (only matters with more than 50 pending invoices)
+- The error rows the portal shows after a rejected category
+- The "Only this" handling and the history re-ask, both built after the first real run
 
 ## What to build
 A Chrome extension that works on the logged-in e-Fatura portal. It reads the buyer's **pending** invoices (the ones AT couldn't classify), decides the IRS deduction category for each, pre-selects it, and leaves the Submit click to the user. Jev decides each category; plain code fetches the invoices, looks up the merchant, and narrows the options.

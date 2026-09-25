@@ -68,14 +68,17 @@
 
   // ---------- Deciding and applying ----------
 
-  async function process(id) {
+  // History is only sent on re-asks, so a first decision never depends on which rows happened to finish first.
+  async function process(id, useHistory = false) {
     const e = entries.get(id);
     const preset = document.getElementById(`documento_${id}`)?.querySelector(".selecaoSector button.active");
     if (preset) return Object.assign(e, { status: "user", code: preset.value }), paintRow(id), paintPanel();
+    const history = useHistory ? settledHistory(e) : [];
     e.status = "deciding";
     paintRow(id);
     e.inv.lines ??= await fetchLines(e.inv);
-    const d = await chrome.runtime.sendMessage({ type: "decide", invoice: e.inv });
+    e.historyCount = history.length;
+    const d = await chrome.runtime.sendMessage({ type: "decide", invoice: { ...e.inv, history } });
     e.decision = d;
     if (!d.ok) { e.status = "error"; e.note = d.error; }
     else if (e.status !== "user") { e.code = d.code; e.status = d.action === "auto" ? "apply" : "ask"; }
@@ -135,11 +138,21 @@
     if (!sameSectorModal()) document.querySelectorAll(".modal-backdrop").forEach((b) => b.remove());
   }
 
-  async function run(ids, limit = 4) {
+  async function run(ids, limit = 4, useHistory = false) {
     const queue = [...ids];
     await Promise.all(Array.from({ length: limit }, async () => {
-      while (queue.length) await process(queue.shift());
+      while (queue.length) await process(queue.shift(), useHistory);
     }));
+    // Second pass: an amber row is asked again once more of its merchant's invoices are settled.
+    // Confident rows are left alone: the same shop can sell a meal and a loaf of bread.
+    const again = [...entries.values()].filter((e) => e.status === "ask" && settledHistory(e).length > (e.historyCount ?? 0));
+    if (again.length) await run(again.map((e) => e.inv.id), limit, true);
+  }
+
+  function settledHistory(e) {
+    return [...entries.values()]
+      .filter((o) => o !== e && o.inv.nif === e.inv.nif && (o.status === "applied" || o.status === "user"))
+      .map((o) => ({ code: o.code, total: o.inv.total, vat: o.inv.vat }));
   }
 
   function scanRows() {

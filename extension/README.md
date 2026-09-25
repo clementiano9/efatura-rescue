@@ -24,6 +24,7 @@ Green rows are filled in. Amber rows show Jev's best guess and runner-up with a 
 | VAT lines | `content.js` | Fetches `detalheDocumentoAdquirente.action` with your session and reads the `dadosLinhasDocumento` array |
 | Merchant activity | `background.js` | nif.pt main CAE + business description, cached forever. The free limit is 10 an hour, so new merchants queue; an amber row is re-decided when its lookup arrives. |
 | Decide | `background.js` + `lib/logic.js` | One Jev choice over all 16 portal categories. Answers are cached by request, so repeat invoices (the same monthly pass) cost nothing. |
+| Re-ask | `content.js` | After the first pass, each amber row is asked again with the merchant's settled invoices on the page (category and totals) as evidence. Confident rows are never re-asked. |
 | Apply | `content.js` | Clicks `button[value=code]` only if the button's `data-original-title` matches the expected label. A button you pick yourself always wins. |
 | Same-sector pop-up | `content.js` | When one merchant has several invoices on the page, the portal asks whether to give them all the same sector (`#modalPendencias`). The extension clicks one button at a time and answers **Só esta** (`#oneBtn`), because Jev decides each invoice separately. It never presses `#allBtn`, and a pop-up you trigger yourself is left for you. |
 

@@ -87,7 +87,21 @@ export function buildState(inv) {
     `Invoice lines by VAT rate (no item names are available):`,
     ...lines,
     `Total: ${eur(inv.total)}`,
+    ...(inv.history?.length ? [historyLine(inv.history)] : []),
   ].join("\n");
+}
+
+// Other invoices from the same merchant that were already settled, as evidence, not an instruction:
+// the same shop can sell a meal and a loaf of bread, so the amounts are included for comparison.
+export function historyLine(history) {
+  const byCode = {};
+  for (const h of history) (byCode[h.code] ??= []).push(h);
+  const parts = Object.entries(byCode).map(([code, hs]) => {
+    const totals = hs.map((h) => h.total).sort((a, b) => a - b);
+    const range = totals[0] === totals.at(-1) ? eur(totals[0]) : `${eur(totals[0])} to ${eur(totals.at(-1))}`;
+    return `${hs.length} as ${CATEGORIES[code].name} (totals ${range})`;
+  });
+  return `Other invoices from this merchant already classified: ${parts.join("; ")}`;
 }
 
 export function buildQuestions(allowed) {

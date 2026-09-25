@@ -26,6 +26,7 @@ The deduction total uses the 2025 IRS rates and caps (`RULES` in `extension/lib/
 |---|---|---|---|
 | Mock page (full CAE list) | 11/11 | 8, all right | 3: pharmacy 76%, protein bar 69%, vet 56%; all best guesses right |
 | Extension (main CAE + description) | 10/11 | 9, all right | 2: take-away bread 79% (right), protein bar 48% (wrong: Ginásios over Outros 47%) |
+| Extension + re-ask with merchant history (`--hint --history`) | 10/11 | 10, all right | 1: protein bar 59% (still wrong best guess, still held back) |
 
 - Calls took 280–970 ms, measured from Lisbon.
 - In both modes, every invoice filled in without asking was correct. The only wrong guess was held back for the user.
