@@ -181,9 +181,10 @@
     started = true;
     panel.go.disabled = true;
     panel.go.textContent = "Sorting…";
+    paintPanel();
     showAllRows();
     await run(scanRows());
-    panel.go.textContent = "Sorted";
+    panel.start.hidden = true;
     paintPanel();
   }
 
@@ -217,22 +218,30 @@
     const d = e.decision;
     const name = e.code ? L.CATEGORIES[e.code]?.name : "";
     const pct = d?.ok ? Math.round(d.confidence * 100) : 0;
+    // The pressed button already names the category, so a filled-in row only shows Jev's confidence; the reason opens on click.
+    const why = (code) => `<button type="button" class="efr-why" aria-expanded="false">why?</button></span><span class="efr-reason" hidden>${L.CATEGORIES[code].reason}</span>`;
     let html = "";
     if (e.status === "deciding") { tr.classList.add("efr-busy"); html = "Jev is deciding…"; }
-    else if (e.status === "applied") { tr.classList.add("efr-auto"); html = `<b>${name}</b> · Jev ${pct}%<br>${L.CATEGORIES[e.code].reason}`; }
-    else if (e.status === "user") { tr.classList.add("efr-auto"); html = `<b>${name}</b> · your choice`; }
+    else if (e.status === "applied") { tr.classList.add("efr-auto"); html = `<span class="efr-line">${e.accepted ? "Your choice · " : ""}Jev ${pct}% ${why(e.code)}`; }
+    else if (e.status === "user") { tr.classList.add("efr-auto"); html = "Your choice"; }
     else if (e.status === "ask") {
       tr.classList.add("efr-ask");
       const [, second] = Object.entries(d.probabilities).sort((a, b) => b[1] - a[1]);
       const alt = second ? `, or ${L.CATEGORIES[second[0]].name} ${Math.round(second[1] * 100)}%` : "";
       const wait = d.caeKnown ? "" : " Merchant lookup pending; Jev will retry.";
-      html = `<b>Check your receipt.</b> Best guess ${name} ${pct}%${alt}.${wait} <button type="button" class="efr-apply">Use ${name}</button>`;
+      html = `<b>Check your receipt.</b> Best guess ${name} ${pct}%${alt}.${wait}
+        <span class="efr-line"><button type="button" class="efr-apply">Use ${name}</button> ${why(e.code)}`;
     } else if (e.status === "mismatch" || e.status === "error") { tr.classList.add("efr-ask"); html = e.note; }
     if (!html) return;
     const div = document.createElement("div");
     div.className = "efr-note";
     div.innerHTML = html;
-    div.querySelector(".efr-apply")?.addEventListener("click", () => { click(id, e.code); paintRow(id); paintPanel(); });
+    div.querySelector(".efr-apply")?.addEventListener("click", () => { e.accepted = true; click(id, e.code); paintRow(id); paintPanel(); });
+    div.querySelector(".efr-why")?.addEventListener("click", (ev) => {
+      const reason = div.querySelector(".efr-reason");
+      reason.hidden = !reason.hidden;
+      ev.currentTarget.setAttribute("aria-expanded", String(!reason.hidden));
+    });
     tr.cells[0].append(div);
   }
 
@@ -244,11 +253,13 @@
     const ready = L.deduction(done.map((e) => ({ inv: e.inv, code: e.code })));
     const waiting = L.deduction([...done, ...is("ask")].map((e) => ({ inv: e.inv, code: e.code }))) - ready;
     const total = Number(document.querySelector("#listaPendencias_info")?.textContent.match(/\d+/)?.[0] ?? all.length);
+    panel.count.textContent = `${total} pending`;
     panel.stats.innerHTML = `
       <div><b>${done.length}</b><span>filled in</span></div>
       <div><b>${asks.length}</b><span>need you</span></div>
       <div><b>${all.length}/${total}</b><span>seen</span></div>`;
-    panel.money.innerHTML = `<b>€${ready.toFixed(2)}</b> ready to submit${waiting > 0 ? ` · €${waiting.toFixed(2)} waiting on you` : ""}`;
+    panel.money.innerHTML = `<b>€${ready.toFixed(2)}</b><span>ready to submit</span>${waiting > 0 ? `<small>€${waiting.toFixed(2)} more waiting on you</small>` : ""}`;
+    panel.results.hidden = !started;
     chrome.runtime.sendMessage({ type: "status" }).then((s) => {
       const bits = [];
       if (!s.hasJevKey) bits.push("No Jev key: open Settings.");
@@ -263,37 +274,54 @@
     const host = document.createElement("div");
     host.style.cssText = "position:fixed;right:16px;bottom:16px;z-index:2147483647";
     const root = host.attachShadow({ mode: "open" });
+    // Icons: Lucide "settings" and "chevron-down".
+    const icon = (d) => `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
     root.innerHTML = `<style>
-      .p { width: 300px; font: 13px/1.4 system-ui, sans-serif; color: #1d1f22; background: #fff; border: 1px solid #d9d5cc; border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,.12); padding: 14px; }
-      h3 { margin: 0 0 2px; font-size: 14px; } p { margin: 0; color: #6b6f76; }
-      .go { width: 100%; margin: 10px 0; padding: 9px; font: inherit; font-weight: 600; color: #fff; background: #1f5f4a; border: 0; border-radius: 7px; cursor: pointer; }
-      .go:disabled { opacity: .65; cursor: default; }
-      .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-      .stats div { background: #f4f2ee; border-radius: 6px; padding: 6px; } .stats b { display: block; font-size: 16px; } .stats span { color: #6b6f76; font-size: 11px; }
-      .money { margin-top: 8px; } .money b { color: #1f5f4a; font-size: 16px; }
-      .status { margin-top: 6px; font-size: 12px; color: #9a5b00; } a { color: #1f5f4a; font-size: 12px; cursor: pointer; }
-      .head { display: flex; justify-content: space-between; align-items: center; }
-      .min { border: 0; background: none; font-size: 16px; cursor: pointer; color: #6b6f76; }
-      .p.small .body { display: none; } .p.small { width: auto; }
+      :host { --green: #1f5f4a; --green-dark: #174a39; --ink: #1d2622; --muted: #55635d; --rule: #dde3e0; --amber: #7a4a00; }
+      .p { width: 272px; font-family: inherit; font-size: 13px; line-height: 1.4; color: var(--ink); background: #fff; border: 1px solid #b7c3bd; border-radius: 4px; box-shadow: 0 2px 8px rgba(20, 45, 35, .2); overflow: hidden; }
+      ::selection { background: #cfe3da; }
+      header { display: flex; align-items: center; gap: 2px; padding: 6px 6px 6px 12px; color: #fff; background: var(--green); }
+      header div { flex: 1; } header strong { font-size: 13px; } header span { margin-left: 6px; font-size: 11px; color: #c9e0d6; }
+      .icon { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; color: #e3efe9; background: none; border: 0; border-radius: 3px; cursor: pointer; }
+      .icon:hover { background: rgba(255, 255, 255, .14); }
+      .min svg { transition: transform .2s cubic-bezier(.2, .8, .2, 1); }
+      .p.small .min svg { transform: rotate(180deg); }
+      button:focus-visible { outline: 2px solid #9fd3bd; outline-offset: -2px; }
+      .body { padding: 12px; } .p.small .body { display: none; }
+      .start { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); }
+      .go { white-space: nowrap; padding: 6px 12px; font: inherit; font-weight: 600; color: #fff; background: var(--green); border: 1px solid var(--green-dark); border-radius: 4px; cursor: pointer; }
+      .go:hover { background: var(--green-dark); } .go:disabled { opacity: .7; cursor: progress; }
+      .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 12px; padding: 8px 0; border-block: 1px solid var(--rule); }
+      .start[hidden] + .results .stats { margin-top: 0; padding-top: 0; border-top: 0; }
+      .stats div + div { padding-left: 10px; border-left: 1px solid var(--rule); }
+      .stats b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; } .stats span { font-size: 11px; color: var(--muted); }
+      .money { margin-top: 10px; } .money b { margin-right: 6px; font-size: 22px; color: var(--green); font-variant-numeric: tabular-nums; }
+      .money small { display: block; font-size: 12px; color: var(--amber); }
+      .status { margin: 8px 0 0; font-size: 12px; color: var(--amber); } .status:empty { display: none; }
+      [hidden] { display: none !important; }
     </style>
-    <div class="p">
-      <div class="head"><h3>e-Fatura Rescue</h3><button class="min" title="Collapse">–</button></div>
+    <section class="p" aria-label="e-Fatura Rescue">
+      <header>
+        <div><strong>e-Fatura Rescue</strong><span>decisions by Jev</span></div>
+        <button class="icon settings" title="Settings" aria-label="Settings">${icon('<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>')}</button>
+        <button class="icon min" title="Collapse" aria-label="Collapse" aria-expanded="true">${icon('<path d="m6 9 6 6 6-6"/>')}</button>
+      </header>
       <div class="body">
-      <p>Jev sorts each pending invoice. Confident ones are filled in; you check the rest and press Submeter.</p>
-      <button class="go">Sort pending invoices</button>
-      <div class="stats"></div><div class="money"></div><div class="status"></div>
-      <a class="settings">Settings</a>
+        <div class="start"><span class="count"></span><button class="go">Sort pending invoices</button></div>
+        <div class="results" hidden><div class="stats"></div><div class="money"></div></div>
+        <p class="status"></p>
       </div>
-    </div>`;
+    </section>`;
     document.body.append(host);
     const $ = (s) => root.querySelector(s);
     $(".go").addEventListener("click", sort);
     $(".settings").addEventListener("click", () => chrome.runtime.sendMessage({ type: "open-options" }));
     $(".min").addEventListener("click", () => {
       const small = $(".p").classList.toggle("small");
-      $(".min").textContent = small ? "+" : "–";
+      $(".min").setAttribute("aria-expanded", String(!small));
+      $(".min").title = small ? "Expand" : "Collapse";
     });
-    return { go: $(".go"), stats: $(".stats"), money: $(".money"), status: $(".status") };
+    return { go: $(".go"), start: $(".start"), count: $(".count"), results: $(".results"), stats: $(".stats"), money: $(".money"), status: $(".status") };
   }
 
   function injectStyles() {
@@ -302,8 +330,15 @@
       #listaPendencias tr.efr-auto > td { background: #e3efe9 !important; }
       #listaPendencias tr.efr-ask > td { background: #fbf0dc !important; }
       #listaPendencias tr.efr-busy > td { opacity: .6; }
-      .efr-note { margin-top: 4px; font-size: 12px; line-height: 1.35; color: #333; max-width: 40ch; }
-      .efr-apply { margin-left: 4px; font-size: 11px; padding: 1px 6px; border: 1px solid #9a5b00; background: #fff; border-radius: 4px; cursor: pointer; }`;
+      .efr-note { margin-top: 4px; font-size: 12px; line-height: 1.4; max-width: 44ch; font-variant-numeric: tabular-nums; }
+      tr.efr-auto .efr-note { color: #245c47; }
+      tr.efr-ask .efr-note { color: #6b4200; }
+      .efr-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-top: 2px; }
+      .efr-reason { display: block; margin-top: 2px; } .efr-reason[hidden] { display: none; }
+      .efr-why { padding: 0; font: inherit; color: inherit; background: none; border: 0; text-decoration: underline dotted; text-underline-offset: 2px; cursor: pointer; }
+      .efr-apply { padding: 1px 8px; font: inherit; font-weight: 600; color: #6b4200; background: #fff; border: 1px solid #c79a55; border-radius: 4px; cursor: pointer; }
+      .efr-apply:hover { background: #fff7ea; }
+      .efr-why:focus-visible, .efr-apply:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }`;
     document.head.append(s);
   }
 
