@@ -1,0 +1,322 @@
+{
+  "2osviqc8u8kfu": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C05",
+        "probabilities": {
+          "C05": 0.93,
+          "C99": 0.07
+        },
+        "confidence": 0.86
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.62
+      }
+    },
+    "ms": 455
+  },
+  "3ayfjaugbwsct": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C05": 0.09,
+          "C99": 0.91
+        },
+        "confidence": 0.83
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.63
+      }
+    },
+    "ms": 472
+  },
+  "1kbgpf6op00r4": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C11",
+        "probabilities": {
+          "C11": 0.98,
+          "C99": 0.02
+        },
+        "confidence": 0.96
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.56
+      }
+    },
+    "ms": 472
+  },
+  "vkycwfk1sgv3": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C04",
+        "probabilities": {
+          "C99": 0.04,
+          "C04": 0.96
+        },
+        "confidence": 0.92
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.58
+      }
+    },
+    "ms": 489
+  },
+  "3hr0ygpgbg7ri": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C06",
+        "probabilities": {
+          "C99": 0,
+          "C06": 1
+        },
+        "confidence": 1
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.37
+      }
+    },
+    "ms": 496
+  },
+  "31ng6y9f97tos": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C05",
+        "probabilities": {
+          "C05": 1,
+          "C99": 0
+        },
+        "confidence": 1
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.58
+      }
+    },
+    "ms": 509
+  },
+  "mtb6wvmmxdzo": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C03",
+        "probabilities": {
+          "C99": 0.13,
+          "C03": 0.87
+        },
+        "confidence": 0.74
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.56
+      }
+    },
+    "ms": 510
+  },
+  "21ckzvr5jpoch": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C09",
+        "probabilities": {
+          "C09": 0.8,
+          "C99": 0.2
+        },
+        "confidence": 0.6
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.64
+      }
+    },
+    "ms": 514
+  },
+  "2u4ee1lvf1dsv": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C03": 0.01,
+          "C99": 0.99
+        },
+        "confidence": 0.98
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.54
+      }
+    },
+    "ms": 564
+  },
+  "20et9yzgumepq": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C11": 0.18,
+          "C99": 0.82
+        },
+        "confidence": 0.64
+      },
+      "needs_receipt": {
+        "type": "noul",
+        "noul": 0.64
+      }
+    },
+    "ms": 824
+  },
+  "2tt7pddnumyn5": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C06",
+        "probabilities": {
+          "C99": 0,
+          "C06": 1
+        },
+        "confidence": 1
+      }
+    },
+    "ms": 491
+  },
+  "lzua3xoa0a92": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C04",
+        "probabilities": {
+          "C99": 0.06,
+          "C04": 0.94
+        },
+        "confidence": 0.88
+      }
+    },
+    "ms": 510
+  },
+  "3u57w7jtwkrj": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C03": 0.01,
+          "C99": 0.99
+        },
+        "confidence": 0.98
+      }
+    },
+    "ms": 514
+  },
+  "nwwnm0g5lw5m": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C09",
+        "probabilities": {
+          "C99": 0.17,
+          "C09": 0.83
+        },
+        "confidence": 0.65
+      }
+    },
+    "ms": 526
+  },
+  "s1klhy393q8m": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C99": 0.85,
+          "C11": 0.15
+        },
+        "confidence": 0.7
+      }
+    },
+    "ms": 542
+  },
+  "2bmuha6lfqgfq": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C05",
+        "probabilities": {
+          "C99": 0,
+          "C05": 1
+        },
+        "confidence": 1
+      }
+    },
+    "ms": 543
+  },
+  "fnrzsnwya3pw": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C99",
+        "probabilities": {
+          "C05": 0.1,
+          "C99": 0.9
+        },
+        "confidence": 0.81
+      }
+    },
+    "ms": 549
+  },
+  "3146fd7yqjd9k": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C05",
+        "probabilities": {
+          "C05": 0.91,
+          "C99": 0.09
+        },
+        "confidence": 0.82
+      }
+    },
+    "ms": 561
+  },
+  "1l7fwf4wwmjq8": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C11",
+        "probabilities": {
+          "C99": 0.03,
+          "C11": 0.97
+        },
+        "confidence": 0.94
+      }
+    },
+    "ms": 575
+  },
+  "3h9sjrl28krmd": {
+    "answers": {
+      "category": {
+        "type": "choice",
+        "choice": "C03",
+        "probabilities": {
+          "C99": 0.13,
+          "C03": 0.87
+        },
+        "confidence": 0.74
+      }
+    },
+    "ms": 575
+  }
+}

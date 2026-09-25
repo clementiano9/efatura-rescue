@@ -1,0 +1,132 @@
+[
+  {
+    "key": "continente",
+    "nif": "502011475",
+    "name": "Modelo Continente Hipermercados",
+    "cae": [
+      "47111"
+    ],
+    "real": true
+  },
+  {
+    "key": "pingodoce",
+    "nif": "500829993",
+    "name": "Pingo Doce",
+    "cae": [
+      "47111"
+    ],
+    "real": true
+  },
+  {
+    "key": "mercadona",
+    "nif": "514038942",
+    "name": "Mercadona",
+    "cae": [
+      "47111"
+    ],
+    "real": true
+  },
+  {
+    "key": "nos",
+    "nif": "502604751",
+    "name": "NOS Comunicações",
+    "cae": [
+      "61100"
+    ],
+    "real": true
+  },
+  {
+    "key": "farmacia",
+    "nif": "552601810",
+    "name": "Farmácia Alegria (exemplo)",
+    "cae": [
+      "47730"
+    ]
+  },
+  {
+    "key": "dentista",
+    "nif": "559083017",
+    "name": "Clínica Dentária Sorriso (exemplo)",
+    "cae": [
+      "86230",
+      "47782"
+    ]
+  },
+  {
+    "key": "pastelaria",
+    "nif": "566131862",
+    "name": "Pastelaria Bica & Nata (exemplo)",
+    "cae": [
+      "10711",
+      "56107"
+    ]
+  },
+  {
+    "key": "tasco",
+    "nif": "509139094",
+    "name": "Restaurante O Tasco (exemplo)",
+    "cae": [
+      "56101"
+    ]
+  },
+  {
+    "key": "ginasio",
+    "nif": "596030827",
+    "name": "FitLisboa Ginásio (exemplo)",
+    "cae": [
+      "93130",
+      "47640"
+    ]
+  },
+  {
+    "key": "barbearia",
+    "nif": "546281940",
+    "name": "Barbearia Alfama (exemplo)",
+    "cae": [
+      "96021",
+      "47750"
+    ]
+  },
+  {
+    "key": "vet",
+    "nif": "582199352",
+    "name": "Clínica Veterinária Patas (exemplo)",
+    "cae": [
+      "75000",
+      "47760"
+    ]
+  },
+  {
+    "key": "navegante",
+    "nif": "518190935",
+    "name": "Transportes Urbanos (exemplo)",
+    "cae": [
+      "49310"
+    ]
+  },
+  {
+    "key": "creche",
+    "nif": "578657970",
+    "name": "Creche Pequenos Passos IPSS (exemplo)",
+    "cae": [
+      "88910",
+      "85100"
+    ]
+  },
+  {
+    "key": "jornal",
+    "nif": "554323192",
+    "name": "Diário de Lisboa Digital (exemplo)",
+    "cae": [
+      "58130"
+    ]
+  },
+  {
+    "key": "lar",
+    "nif": "548757496",
+    "name": "Lar Sénior Tejo (exemplo)",
+    "cae": [
+      "87301"
+    ]
+  }
+]

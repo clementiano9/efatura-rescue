@@ -1,0 +1,746 @@
+{
+  "success": true,
+  "totalElementos": 18,
+  "linhas": [
+    {
+      "idDocumento": 9000001,
+      "nifEmitente": 502011475,
+      "nomeEmitente": "Modelo Continente Hipermercados",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/107",
+      "atcud": "EH4LXK94-107",
+      "dataEmissaoDocumento": "2025-01-18",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C99",
+      "valorTotal": 7421,
+      "valorIva": 756,
+      "linhas": [
+        {
+          "valorBaseTributavel": 4210,
+          "valorIva": 253,
+          "valorTotal": 4463,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-01-18"
+        },
+        {
+          "valorBaseTributavel": 620,
+          "valorIva": 81,
+          "valorTotal": 701,
+          "taxaIva": 1300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "INT",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-01-18"
+        },
+        {
+          "valorBaseTributavel": 1835,
+          "valorIva": 422,
+          "valorTotal": 2257,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-01-18"
+        }
+      ],
+      "_cae": [
+        "47111"
+      ],
+      "_realMerchantNif": true,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Supermarket, single CAE 47111: AT auto-classifies as general household expense."
+      }
+    },
+    {
+      "idDocumento": 9000002,
+      "nifEmitente": 500829993,
+      "nomeEmitente": "Pingo Doce",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/114",
+      "atcud": "WXY97EFT-114",
+      "dataEmissaoDocumento": "2025-02-03",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C99",
+      "valorTotal": 3642,
+      "valorIva": 352,
+      "linhas": [
+        {
+          "valorBaseTributavel": 2380,
+          "valorIva": 143,
+          "valorTotal": 2523,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-02-03"
+        },
+        {
+          "valorBaseTributavel": 910,
+          "valorIva": 209,
+          "valorTotal": 1119,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-02-03"
+        }
+      ],
+      "_cae": [
+        "47111"
+      ],
+      "_realMerchantNif": true,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Supermarket, general."
+      }
+    },
+    {
+      "idDocumento": 9000003,
+      "nifEmitente": 514038942,
+      "nomeEmitente": "Mercadona",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/121",
+      "atcud": "V6U2YB7Y-121",
+      "dataEmissaoDocumento": "2025-03-11",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C99",
+      "valorTotal": 4884,
+      "valorIva": 479,
+      "linhas": [
+        {
+          "valorBaseTributavel": 3145,
+          "valorIva": 189,
+          "valorTotal": 3334,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-03-11"
+        },
+        {
+          "valorBaseTributavel": 1260,
+          "valorIva": 290,
+          "valorTotal": 1550,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-03-11"
+        }
+      ],
+      "_cae": [
+        "47111"
+      ],
+      "_realMerchantNif": true,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Supermarket, general."
+      }
+    },
+    {
+      "idDocumento": 9000004,
+      "nifEmitente": 502604751,
+      "nomeEmitente": "NOS Comunicações",
+      "tipoDocumento": "FT",
+      "numeroDocumento": "FT A2025/128",
+      "atcud": "DPUJR339-128",
+      "dataEmissaoDocumento": "2025-03-01",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C99",
+      "valorTotal": 4499,
+      "valorIva": 841,
+      "linhas": [
+        {
+          "valorBaseTributavel": 3658,
+          "valorIva": 841,
+          "valorTotal": 4499,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-03-01"
+        }
+      ],
+      "_cae": [
+        "61100"
+      ],
+      "_realMerchantNif": true,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Telecom bill, general."
+      }
+    },
+    {
+      "idDocumento": 9000005,
+      "nifEmitente": 552601810,
+      "nomeEmitente": "Farmácia Alegria (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/135",
+      "atcud": "TJ5T4Y2Q-135",
+      "dataEmissaoDocumento": "2025-02-14",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 3179,
+      "valorIva": 340,
+      "linhas": [
+        {
+          "valorBaseTributavel": 1840,
+          "valorIva": 110,
+          "valorTotal": 1950,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-02-14"
+        },
+        {
+          "valorBaseTributavel": 999,
+          "valorIva": 230,
+          "valorTotal": 1229,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-02-14"
+        }
+      ],
+      "_cae": [
+        "47730"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Saude",
+        "codigo": "C05",
+        "why": "Pharmacy: the 6% line is medicine, so it counts as health. The 23% line counts as health only with a prescription; otherwise it stays general."
+      }
+    },
+    {
+      "idDocumento": 9000006,
+      "nifEmitente": 552601810,
+      "nomeEmitente": "Farmácia Alegria (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/142",
+      "atcud": "QQA9MSUA-142",
+      "dataEmissaoDocumento": "2025-06-22",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 3013,
+      "valorIva": 563,
+      "linhas": [
+        {
+          "valorBaseTributavel": 2450,
+          "valorIva": 563,
+          "valorTotal": 3013,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-06-22"
+        }
+      ],
+      "_cae": [
+        "47730"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Pharmacy but only a 23% line (cosmetics or supplements). Without a prescription this is a general expense, not health."
+      }
+    },
+    {
+      "idDocumento": 9000007,
+      "nifEmitente": 559083017,
+      "nomeEmitente": "Clínica Dentária Sorriso (exemplo)",
+      "tipoDocumento": "FR",
+      "numeroDocumento": "FR A2025/149",
+      "atcud": "WJD73333-149",
+      "dataEmissaoDocumento": "2025-04-09",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 8500,
+      "valorIva": 0,
+      "linhas": [
+        {
+          "valorBaseTributavel": 8500,
+          "valorIva": 0,
+          "valorTotal": 8500,
+          "taxaIva": 0,
+          "tipoTaxaIva": "ISE",
+          "motivoIsencao": "M07",
+          "taxa": "ISE",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-04-09"
+        }
+      ],
+      "_cae": [
+        "86230",
+        "47782"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Saude",
+        "codigo": "C05",
+        "why": "Dental clinic, exempt under CIVA art. 9. Its second CAE (retail) makes AT unsure; the exempt medical act means health."
+      }
+    },
+    {
+      "idDocumento": 9000008,
+      "nifEmitente": 566131862,
+      "nomeEmitente": "Pastelaria Bica & Nata (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/156",
+      "atcud": "DNEP6LHX-156",
+      "dataEmissaoDocumento": "2025-05-06",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 498,
+      "valorIva": 68,
+      "linhas": [
+        {
+          "valorBaseTributavel": 310,
+          "valorIva": 40,
+          "valorTotal": 350,
+          "taxaIva": 1300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "INT",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-05-06"
+        },
+        {
+          "valorBaseTributavel": 120,
+          "valorIva": 28,
+          "valorTotal": 148,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-05-06"
+        }
+      ],
+      "_cae": [
+        "10711",
+        "56107"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Restauracao",
+        "codigo": "C03",
+        "why": "Bakery with a café CAE. Food at 13% plus a drink at 23% means a meal eaten in, which is restaurant spending."
+      }
+    },
+    {
+      "idDocumento": 9000009,
+      "nifEmitente": 566131862,
+      "nomeEmitente": "Pastelaria Bica & Nata (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/163",
+      "atcud": "KGZBEP2K-163",
+      "dataEmissaoDocumento": "2025-05-07",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 254,
+      "valorIva": 14,
+      "linhas": [
+        {
+          "valorBaseTributavel": 240,
+          "valorIva": 14,
+          "valorTotal": 254,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-05-07"
+        }
+      ],
+      "_cae": [
+        "10711",
+        "56107"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Same bakery, but a single 6% line is bread to take away, not restaurant spending."
+      }
+    },
+    {
+      "idDocumento": 9000010,
+      "nifEmitente": 509139094,
+      "nomeEmitente": "Restaurante O Tasco (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/170",
+      "atcud": "Z8HH9788-170",
+      "dataEmissaoDocumento": "2025-05-17",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C03",
+      "valorTotal": 3173,
+      "valorIva": 423,
+      "linhas": [
+        {
+          "valorBaseTributavel": 2100,
+          "valorIva": 273,
+          "valorTotal": 2373,
+          "taxaIva": 1300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "INT",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-05-17"
+        },
+        {
+          "valorBaseTributavel": 650,
+          "valorIva": 150,
+          "valorTotal": 800,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-05-17"
+        }
+      ],
+      "_cae": [
+        "56101"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Restauracao",
+        "codigo": "C03",
+        "why": "Restaurant, single CAE 56101: AT auto-assigns restaurant spending."
+      }
+    },
+    {
+      "idDocumento": 9000011,
+      "nifEmitente": 596030827,
+      "nomeEmitente": "FitLisboa Ginásio (exemplo)",
+      "tipoDocumento": "FT",
+      "numeroDocumento": "FT A2025/177",
+      "atcud": "XS8LBPZK-177",
+      "dataEmissaoDocumento": "2025-01-05",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 4000,
+      "valorIva": 748,
+      "linhas": [
+        {
+          "valorBaseTributavel": 3252,
+          "valorIva": 748,
+          "valorTotal": 4000,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-01-05"
+        }
+      ],
+      "_cae": [
+        "93130",
+        "47640"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Ginasios",
+        "codigo": "C11",
+        "why": "Gym with a secondary retail CAE. A monthly-membership-sized amount means gym spending."
+      }
+    },
+    {
+      "idDocumento": 9000012,
+      "nifEmitente": 596030827,
+      "nomeEmitente": "FitLisboa Ginásio (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/184",
+      "atcud": "FSZLYQXQ-184",
+      "dataEmissaoDocumento": "2025-01-19",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 349,
+      "valorIva": 65,
+      "linhas": [
+        {
+          "valorBaseTributavel": 284,
+          "valorIva": 65,
+          "valorTotal": 349,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-01-19"
+        }
+      ],
+      "_cae": [
+        "93130",
+        "47640"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Outros",
+        "codigo": "C99",
+        "why": "Same gym, small 23% purchase (protein bar). Retail, so general expense."
+      }
+    },
+    {
+      "idDocumento": 9000013,
+      "nifEmitente": 546281940,
+      "nomeEmitente": "Barbearia Alfama (exemplo)",
+      "tipoDocumento": "FS",
+      "numeroDocumento": "FS A2025/191",
+      "atcud": "QN9YBBT8-191",
+      "dataEmissaoDocumento": "2025-03-22",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 1501,
+      "valorIva": 281,
+      "linhas": [
+        {
+          "valorBaseTributavel": 1220,
+          "valorIva": 281,
+          "valorTotal": 1501,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-03-22"
+        }
+      ],
+      "_cae": [
+        "96021",
+        "47750"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Cabeleireiro",
+        "codigo": "C04",
+        "why": "Barber with a cosmetics-retail CAE. A haircut-sized amount means hairdresser spending."
+      }
+    },
+    {
+      "idDocumento": 9000014,
+      "nifEmitente": 582199352,
+      "nomeEmitente": "Clínica Veterinária Patas (exemplo)",
+      "tipoDocumento": "FT",
+      "numeroDocumento": "FT A2025/198",
+      "atcud": "6YZFQGQ8-198",
+      "dataEmissaoDocumento": "2025-07-02",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 5000,
+      "valorIva": 935,
+      "linhas": [
+        {
+          "valorBaseTributavel": 4065,
+          "valorIva": 935,
+          "valorTotal": 5000,
+          "taxaIva": 2300,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "NOR",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-07-02"
+        }
+      ],
+      "_cae": [
+        "75000",
+        "47760"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Veterinario",
+        "codigo": "C09",
+        "why": "Vet clinic with a pet-shop CAE, same VAT rate either way. Ambiguous: flag it and ask for the receipt."
+      }
+    },
+    {
+      "idDocumento": 9000015,
+      "nifEmitente": 518190935,
+      "nomeEmitente": "Transportes Urbanos (exemplo)",
+      "tipoDocumento": "FR",
+      "numeroDocumento": "FR A2025/205",
+      "atcud": "A8YFH2N8-205",
+      "dataEmissaoDocumento": "2025-02-01",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C10",
+      "valorTotal": 4000,
+      "valorIva": 226,
+      "linhas": [
+        {
+          "valorBaseTributavel": 3774,
+          "valorIva": 226,
+          "valorTotal": 4000,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-02-01"
+        }
+      ],
+      "_cae": [
+        "49310"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "PassePublico",
+        "codigo": "C10",
+        "why": "Monthly public-transport pass."
+      }
+    },
+    {
+      "idDocumento": 9000016,
+      "nifEmitente": 578657970,
+      "nomeEmitente": "Creche Pequenos Passos IPSS (exemplo)",
+      "tipoDocumento": "FT",
+      "numeroDocumento": "FT A2025/212",
+      "atcud": "F373FLLJ-212",
+      "dataEmissaoDocumento": "2025-09-30",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 21000,
+      "valorIva": 0,
+      "linhas": [
+        {
+          "valorBaseTributavel": 21000,
+          "valorIva": 0,
+          "valorTotal": 21000,
+          "taxaIva": 0,
+          "tipoTaxaIva": "ISE",
+          "motivoIsencao": "M07",
+          "taxa": "ISE",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-09-30"
+        }
+      ],
+      "_cae": [
+        "88910",
+        "85100"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Educacao",
+        "codigo": "C06",
+        "why": "Registered charity (IPSS) with a social-services CAE plus a pre-school CAE. Nursery fees count as education."
+      }
+    },
+    {
+      "idDocumento": 9000017,
+      "nifEmitente": 554323192,
+      "nomeEmitente": "Diário de Lisboa Digital (exemplo)",
+      "tipoDocumento": "FR",
+      "numeroDocumento": "FR A2025/219",
+      "atcud": "K8YKJBAG-219",
+      "dataEmissaoDocumento": "2025-04-01",
+      "estadoDocumento": "A",
+      "ambitoAquisicao": "C12",
+      "valorTotal": 799,
+      "valorIva": 45,
+      "linhas": [
+        {
+          "valorBaseTributavel": 754,
+          "valorIva": 45,
+          "valorTotal": 799,
+          "taxaIva": 600,
+          "tipoTaxaIva": "IVA",
+          "motivoIsencao": null,
+          "taxa": "RED",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-04-01"
+        }
+      ],
+      "_cae": [
+        "58130"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Jornais",
+        "codigo": "C12",
+        "why": "Newspaper subscription."
+      }
+    },
+    {
+      "idDocumento": 9000018,
+      "nifEmitente": 548757496,
+      "nomeEmitente": "Lar Sénior Tejo (exemplo)",
+      "tipoDocumento": "FT",
+      "numeroDocumento": "FT A2025/226",
+      "atcud": "PBSPURWS-226",
+      "dataEmissaoDocumento": "2025-10-31",
+      "estadoDocumento": "P",
+      "ambitoAquisicao": null,
+      "valorTotal": 95000,
+      "valorIva": 0,
+      "linhas": [
+        {
+          "valorBaseTributavel": 95000,
+          "valorIva": 0,
+          "valorTotal": 95000,
+          "taxaIva": 0,
+          "tipoTaxaIva": "ISE",
+          "motivoIsencao": "M07",
+          "taxa": "ISE",
+          "paisTaxa": "PT",
+          "regiaoTaxa": "1",
+          "dataDocumento": "2025-10-31"
+        }
+      ],
+      "_cae": [
+        "87301"
+      ],
+      "_realMerchantNif": false,
+      "_expected": {
+        "ambito": "Lares",
+        "codigo": "C08",
+        "why": "Care home for a parent (dependent), so care home spending."
+      }
+    }
+  ]
+}

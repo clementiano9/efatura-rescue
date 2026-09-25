@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>e-Fatura Rescue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<style>
+  :root {
+    --bg: #f4f2ee; --surface: #fff; --ink: #1d1f22; --muted: #6b6f76; --line: #e3e0da;
+    --brand: #1f5f4a; --brand-soft: #e3efe9; --warn: #9a5b00; --warn-soft: #fbf0dc; --bad: #a33a2b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 "IBM Plex Sans", system-ui, sans-serif; }
+  .num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  header { display: flex; align-items: center; gap: 12px; padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 16px; font-weight: 600; margin: 0; }
+  header .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; }
+  header .who { margin-left: auto; color: var(--muted); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; padding: 20px 24px; max-width: 1280px; margin: 0 auto; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .banner { grid-column: 1 / -1; padding: 10px 14px; background: var(--warn-soft); color: var(--warn); border-radius: 8px; display: none; }
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 18px 8px; }
+  .list-head h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .list-head span { color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-weight: 500; color: var(--muted); font-size: 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  td.r, th.r { text-align: right; }
+  td.num { white-space: nowrap; }
+  .merchant { font-weight: 500; }
+  .sub { color: var(--muted); font-size: 12px; }
+  .reason { margin-top: 4px; font-size: 12.5px; color: var(--ink); max-width: 46ch; }
+  select { font: inherit; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: #fff; min-width: 140px; }
+  tr.auto select { border-color: var(--brand); background: var(--brand-soft); }
+  tr.ask { background: var(--warn-soft); }
+  tr.ask select { border-color: var(--warn); }
+  tr.done { opacity: .5; }
+  tr.fresh td { animation: flash .6s ease-out; }
+  @keyframes flash { from { background: #d7ebe2; } }
+  .chip { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 11.5px; padding: 2px 7px; border-radius: 999px; background: #efede8; color: var(--muted); }
+  .chip.jev { background: var(--brand-soft); color: var(--brand); }
+  .chip.warn { background: #f5dfb8; color: var(--warn); }
+  .chip svg { width: 12px; height: 12px; }
+  .submit { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+  .submit:disabled { cursor: default; color: var(--muted); }
+  aside { position: sticky; top: 20px; align-self: start; display: grid; gap: 14px; }
+  .panel { padding: 18px; }
+  .panel h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .panel p { margin: 0; color: var(--muted); }
+  .go { width: 100%; margin-top: 14px; padding: 12px; font: inherit; font-weight: 600; color: #fff; background: var(--brand); border: 0; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
+  .go:disabled { opacity: .6; cursor: default; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+  .stat { background: var(--bg); border-radius: 8px; padding: 10px; }
+  .stat b { display: block; font-size: 20px; }
+  .stat small { color: var(--muted); }
+  .money { padding: 18px; }
+  .money .big { font-size: 34px; font-weight: 600; color: var(--brand); margin: 4px 0; }
+  .money .row { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+  .foot { color: var(--muted); font-size: 12px; padding: 0 4px; }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; padding: 16px; }
+    aside { position: static; order: -1; }
+    .hide-sm { display: none; }
+    table { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <i data-lucide="receipt-text"></i>
+  <h1>e-Fatura · Pending invoices</h1>
+  <span class="tag">mock portal · sample data</span>
+  <span class="who">Buyer NIF <span class="num">123 456 789</span> · 2025</span>
+</header>
+
+<main>
+  <div class="banner" id="banner"></div>
+
+  <section class="card">
+    <div class="list-head">
+      <h2>Faturas pendentes</h2>
+      <span id="count"></span>
+    </div>
+    <table>
+      <thead><tr>
+        <th>Merchant</th><th class="hide-sm">Date</th><th class="r">Total</th><th class="r hide-sm">VAT</th><th>Sector</th><th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+
+  <aside>
+    <div class="card panel">
+      <h3><i data-lucide="sparkles"></i>Rescue</h3>
+      <p>Code narrows each invoice by the merchant's activity codes. Jev picks the category. You press Submit.</p>
+      <button class="go" id="go"><i data-lucide="wand-sparkles"></i><span>Sort pending invoices</span></button>
+      <div class="stats">
+        <div class="stat"><b class="num" id="s-auto">–</b><small>pre-filled</small></div>
+        <div class="stat"><b class="num" id="s-ask">–</b><small>need you</small></div>
+        <div class="stat"><b class="num" id="s-ms">–</b><small id="s-ms-label">seconds</small></div>
+      </div>
+    </div>
+    <div class="card money">
+      <p class="sub">Deductions these invoices unlock</p>
+      <div class="big num" id="m-total">€0.00</div>
+      <div class="row"><span>Ready to submit</span><span class="num" id="m-ready">€0.00</span></div>
+      <div class="row"><span>Waiting on your check</span><span class="num" id="m-wait">€0.00</span></div>
+    </div>
+    <p class="foot">Pending invoices count for nothing on your IRS return until you classify them. Amounts use the 2025 deduction rates and caps.</p>
+  </aside>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
