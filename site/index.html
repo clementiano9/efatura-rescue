@@ -56,6 +56,9 @@ section{scroll-margin-top:16px}
 .dB-link{display:inline-flex;align-items:center;gap:8px;min-height:50px;font-weight:700;color:var(--blue);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
 .dB-link .num{font-weight:400;color:var(--blue-2)}
 .dB-nav .dB-btn{min-height:40px;padding:0 16px;font-size:.92rem}
+.dB .dB-gh{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1.5px solid var(--blue);color:var(--blue);font:700 .92rem/1 var(--text);text-decoration:none}
+.dB .dB-gh:hover{background:var(--blue);color:var(--white)}
+.dB-install .dB-gh{min-height:50px;padding:0 20px;font-size:1rem;margin-top:26px;justify-self:start;grid-column:1 / span 5}
 
 /* hero */
 .dB-hero .dB-wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-block:clamp(48px,6vw,88px) clamp(64px,7vw,104px);align-items:center}
@@ -153,9 +156,10 @@ section{scroll-margin-top:16px}
 .dB-run{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
 .dB-sheet{grid-column:1 / span 7;background:var(--white);padding:16px 16px 12px;position:relative;box-shadow:0 14px 30px -20px rgba(38,49,122,.55)}
 .dB-sheet::before{content:"";position:absolute;left:0;right:0;top:0;border-top:2px dashed var(--rule)}
-.dB-sheet video{display:block;width:100%;height:auto;aspect-ratio:1280/656;background:#ddd}
+.dB-yt{position:relative;aspect-ratio:2880/1476;background:#1b1f3a;overflow:hidden}
+.dB-yt img,.dB-yt iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;display:block}
 .dB-sheet figcaption{display:flex;justify-content:space-between;gap:12px;font-size:.78rem;color:var(--blue-2);margin-top:10px}
-.dB-play{position:absolute;inset:16px 16px 40px;display:grid;place-items:center;background:rgba(38,49,122,.06);border:0;cursor:pointer}
+.dB-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(38,49,122,.06);border:0;cursor:pointer}
 .dB-play span{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:var(--white);padding:14px 20px;font:700 1rem/1 var(--text)}
 .dB-play[hidden]{display:none}
 .dB-log{grid-column:9 / span 4;display:grid;gap:0}
@@ -173,9 +177,10 @@ section{scroll-margin-top:16px}
 
 .dB-install{background:var(--white);border-top:2px dashed var(--rule)}
 .dB-install .dB-wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-block:clamp(80px,9vw,120px)}
+.dB-install .dB-wrap{grid-template-rows:auto auto 1fr;align-items:start}
 .dB-install h2{grid-column:1 / span 5}
 .dB-install .intro{grid-column:1 / span 5;color:var(--blue-2);margin-top:18px}
-.dB-steps{grid-column:7 / span 6;grid-row:1 / span 2;list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:q}
+.dB-steps{grid-column:7 / span 6;grid-row:1 / span 3;list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:q}
 .dB-steps li{counter-increment:q;border:1px solid var(--blue);display:grid;grid-template-columns:52px 1fr}
 .dB-steps li::before{content:counter(q);background:var(--blue);color:var(--white);display:grid;place-items:center;font-family:var(--serif);font-size:1.6rem}
 .dB-steps div{padding:14px 16px;display:grid;gap:4px}
@@ -186,7 +191,7 @@ section{scroll-margin-top:16px}
 
 @media (max-width:1080px){
   .dB-nav ul{display:none}
-  .dB-nav .dB-btn{margin-left:auto}
+  .dB-nav .dB-gh{margin-left:auto}
   .dB-copy,.dB-pad,.dB-caption{grid-column:1 / -1}
   .dB-caption{margin-top:0}
   .dB-head h2,.dB-head p{grid-column:1 / -1}
@@ -200,6 +205,7 @@ section{scroll-margin-top:16px}
 }
 @media (max-width:620px){
   .dB-nav .dB-btn{display:none}
+  .dB-install .dB-gh{grid-column:1 / -1}
   .dB-slips{grid-template-columns:1fr}
   .dB-pad{padding:14px 12px 0}
   .dB-form{grid-template-columns:1fr}
@@ -231,6 +237,7 @@ section{scroll-margin-top:16px}
         <li><a href="#b-run">Demo</a></li>
         <li><a href="#b-limits">Limits</a></li>
       </ul>
+      <a class="dB-gh" href="https://github.com/clementiano9/efatura-rescue" target="_blank" rel="noopener"><i data-lucide="github" class="icon"></i>GitHub</a>
       <a class="dB-btn" href="#b-install">Get the preview</a>
     </div>
   </header>
@@ -243,9 +250,9 @@ section{scroll-margin-top:16px}
           <p class="dB-lede">A Chrome extension for e-Fatura’s pending-invoices page. It works out the category for each invoice and stamps it when it’s sure. The rest get a pencil mark for you. <strong>Submeter stays your click.</strong></p>
           <div class="dB-actions">
             <a class="dB-btn" href="#b-install">Get the preview</a>
-            <a class="dB-link" href="#b-run"><i data-lucide="play" class="icon"></i>Watch the demo <span class="num">0:47</span></a>
+            <a class="dB-link" href="#b-run"><i data-lucide="play" class="icon"></i>Watch the demo <span class="num">0:27</span></a>
           </div>
-          <p class="dB-carbon">In the demo, <b class="num">49</b> of <b class="num">50</b> invoices are stamped on the first pass.</p>
+          <p class="dB-carbon">In the demo, all <b class="num">50</b> pending invoices are stamped about two seconds after pressing Sort.</p>
         </div>
 
         <div class="dB-pad">
@@ -352,17 +359,19 @@ section{scroll-margin-top:16px}
     <section class="dB-sec" id="b-run" aria-labelledby="b-run-title">
       <div class="dB-wrap dB-run">
         <figure class="dB-sheet" style="margin:0">
-          <video id="b-film" preload="none" playsinline muted poster="poster.webp" aria-label="Screen recording of the extension sorting 50 pending invoices on the e-Fatura portal"><source src="run.mp4" type="video/mp4"></video>
-          <button class="dB-play" id="b-play" type="button" aria-label="Play the 47-second recording"><span><i data-lucide="play" class="icon"></i>Play the recording 0:47</span></button>
-          <figcaption><span>e-Fatura · resolver pendências · 25 Sep 2026</span><span>Personal details blurred</span></figcaption>
+          <div class="dB-yt" id="b-yt">
+            <img src="https://i.ytimg.com/vi/JK3VBGi6yVc/maxresdefault.jpg" alt="The e-Fatura pending-invoices list with the extension panel open" loading="lazy" width="1280" height="720">
+            <button class="dB-play" id="b-play" type="button" aria-label="Play the 27-second demo"><span><i data-lucide="play" class="icon"></i>Play the demo 0:27</span></button>
+          </div>
+          <figcaption><span>e-Fatura · pending invoices · 25 Sep 2026</span><a href="https://youtu.be/JK3VBGi6yVc" target="_blank" rel="noopener">Watch on YouTube</a></figcaption>
         </figure>
         <div class="dB-log">
           <h2 id="b-run-title">The demo: 50 pending invoices, sorted</h2>
           <ol>
-            <li><time class="num">0:00</time><span>Sort pending invoices pressed on a list of 50.</span></li>
-            <li><time class="num">0:06</time><span>49 stamped, 1 marked for you. 7 merchants queued for nif.pt.</span></li>
-            <li><time class="num">0:18</time><span>The re-ask, using the merchant’s other invoices, settles the last one: 50 of 50.</span></li>
-            <li><time class="num">0:47</time><span><span class="eur num">€248.18</span>ready to submit. Submeter stays with you.</span></li>
+            <li><time class="num">0:00</time><span>50 pending invoices on the list, each with its row of category buttons.</span></li>
+            <li><time class="num">0:06</time><span>Sort pending invoices pressed. 7 new merchants queue for nif.pt.</span></li>
+            <li><time class="num">0:07</time><span>18 stamped.</span></li>
+            <li><time class="num">0:08</time><span><span class="eur num">€248.18</span>ready to submit: 50 of 50 stamped, none left for you. Submeter stays with you.</span></li>
           </ol>
         </div>
       </div>
@@ -384,9 +393,10 @@ section{scroll-margin-top:16px}
       <div class="dB-wrap">
         <h2 id="b-install-title">Get the developer preview</h2>
         <p class="intro">It isn’t on the Chrome Web Store yet. Loading it by hand takes three steps, a Jev key and a free nif.pt key.</p>
+        <a class="dB-gh" href="https://github.com/clementiano9/efatura-rescue" target="_blank" rel="noopener"><i data-lucide="github" class="icon"></i>View the code on GitHub</a>
         <ol class="dB-steps">
           <li><div><strong>Add your keys</strong><span>A Jev key (through OpenRouter or TypeSafe) and a free <a href="https://www.nif.pt/api/">nif.pt</a> key, typed into the extension’s Settings page.</span></div></li>
-          <li><div><strong>Load it in Chrome</strong><span>Open <code>chrome://extensions</code>, turn on Developer mode, click Load unpacked and pick the <code>extension</code> folder.</span></div></li>
+          <li><div><strong>Load it in Chrome</strong><span>Open <code>chrome://extensions</code>, turn on Developer mode, click Load unpacked and pick the <code>extension</code> folder from the <a href="https://github.com/clementiano9/efatura-rescue" target="_blank" rel="noopener">GitHub repo</a>.</span></div></li>
           <li><div><strong>Open your pending invoices</strong><span>Go to “resolver pendências” on e-Fatura with page translation off, then press Sort pending invoices.</span></div></li>
         </ol>
       </div>
@@ -426,8 +436,13 @@ section{scroll-margin-top:16px}
     if (!s.classList.contains('asked') || s.classList.contains('stamped')) return;
     you--; stamp(s); render(); status.textContent = 'All six stamped. Press Submeter when you’re ready.';
   });
-  const film = document.getElementById('b-film'), play = document.getElementById('b-play');
-  play.addEventListener('click', () => { play.hidden = true; film.controls = true; film.play().catch(() => {}); });
+  document.getElementById('b-play').addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/JK3VBGi6yVc?autoplay=1&rel=0';
+    f.title = 'e-Fatura Rescue demo';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    document.getElementById('b-yt').replaceChildren(f);
+  });
   setTimeout(run, reduce ? 0 : 600);
 })();
 </script>
