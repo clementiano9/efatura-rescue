@@ -4,3 +4,4 @@
 .playwright-mcp/
 node_modules/
 extension/config.local.json
+dist/

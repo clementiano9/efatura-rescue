@@ -281,7 +281,8 @@
       .p { width: 272px; font-family: inherit; font-size: 13px; line-height: 1.4; color: var(--ink); background: #fff; border: 1px solid #b7c3bd; border-radius: 4px; box-shadow: 0 2px 8px rgba(20, 45, 35, .2); overflow: hidden; }
       ::selection { background: #cfe3da; }
       header { display: flex; align-items: center; gap: 2px; padding: 6px 6px 6px 12px; color: #fff; background: var(--green); }
-      header div { flex: 1; } header strong { font-size: 13px; } header span { margin-left: 6px; font-size: 11px; color: #c9e0d6; }
+      header .mark { margin-right: 8px; height: 22px; width: auto; }
+      header div { flex: 1; } header strong { font-size: 13px; } header span { display: block; font-size: 11px; line-height: 1.2; color: #c9e0d6; }
       .icon { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; color: #e3efe9; background: none; border: 0; border-radius: 3px; cursor: pointer; }
       .icon:hover { background: rgba(255, 255, 255, .14); }
       .min svg { transition: transform .2s cubic-bezier(.2, .8, .2, 1); }
@@ -302,6 +303,7 @@
     </style>
     <section class="p" aria-label="e-Fatura Rescue">
       <header>
+        <img class="mark" src="${chrome.runtime.getURL("icons/mark-white.png")}" alt="" width="21" height="22">
         <div><strong>e-Fatura Rescue</strong><span>decisions by Jev</span></div>
         <button class="icon settings" title="Settings" aria-label="Settings">${icon('<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>')}</button>
         <button class="icon min" title="Collapse" aria-label="Collapse" aria-expanded="true">${icon('<path d="m6 9 6 6 6-6"/>')}</button>

@@ -19,10 +19,11 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["lib/logic.js"],
+      "resources": ["lib/logic.js", "icons/mark-white.png"],
       "matches": ["https://faturas.portaldasfinancas.gov.pt/*", "http://localhost:3210/*"]
     }
   ],
   "options_page": "options.html",
-  "action": { "default_title": "e-Fatura Rescue" }
+  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
+  "action": { "default_title": "e-Fatura Rescue", "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png" } }
 }
