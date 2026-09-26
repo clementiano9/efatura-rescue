@@ -1,2 +1,2 @@
 FROM nginx:1.27-alpine
-COPY index.html /usr/share/nginx/html/
+COPY index.html demo-thumb.webp /usr/share/nginx/html/
